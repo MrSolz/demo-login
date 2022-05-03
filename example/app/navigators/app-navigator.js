@@ -11,7 +11,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack"
 // import { Demo, HomeScreen, } from "../screens"
 import { navigationRef, useBackButtonHandler } from "./navigation-utilities"
 import HomeScreen from "../screens/Home";
-import { DemoScreen, LoginScreen } from "react-native-module-template"
+import { DemoScreen, LoginScreen } from "demo-login"
 
 
 /**

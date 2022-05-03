@@ -6,7 +6,7 @@ import { AppRegistry } from 'react-native';
 import App from './app/app';
 import { name as appName } from './app.json';
 import Config from "react-native-config"
-import { setDefaultProps } from "react-native-module-template"
+import { setDefaultProps } from "demo-login"
 console.log('====================================');
 console.log("process", Config.API_URL);
 console.log('====================================');

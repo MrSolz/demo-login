@@ -1,6 +1,6 @@
 {
-  "name": "react-native-module-template-example",
-  "description": "Example app for react-native-module-template",
+  "name": "demo-login-example",
+  "description": "Example app for demo-login",
   "version": "0.0.1",
   "private": true,
   "scripts": {

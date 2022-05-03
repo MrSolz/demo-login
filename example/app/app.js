@@ -7,7 +7,7 @@ import { AppNavigator, useNavigationPersistence } from "./navigators"
 import { initFonts } from "./theme/fonts";
 import { ErrorBoundary } from "./screens/Error/errorBoundary"
 import { RootStoreProvider, setupRootStore } from "./models"
-import { subject } from "react-native-module-template"
+import { subject } from "demo-login"
 const App = ({ }) => {
     const [rootStore, setRootStore] = useState(undefined)
     useEffect(() => {

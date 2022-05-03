@@ -1,4 +1,4 @@
-package com.reactnativemoduletemplate;
+package com.rndemologin;
 
 import android.graphics.Color;
 import android.view.View;
@@ -9,8 +9,8 @@ import com.facebook.react.uimanager.SimpleViewManager;
 import com.facebook.react.uimanager.ThemedReactContext;
 import com.facebook.react.uimanager.annotations.ReactProp;
 
-public class ModuleTemplateViewManager extends SimpleViewManager<View> {
-    public static final String REACT_CLASS = "ModuleTemplateView";
+public class RNDemoLoginViewManager extends SimpleViewManager<View> {
+    public static final String REACT_CLASS = "RNDemoLoginView";
 
     @Override
     @NonNull

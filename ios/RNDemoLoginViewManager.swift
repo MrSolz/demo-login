@@ -1,12 +1,12 @@
-@objc(ModuleTemplateViewManager)
-class ModuleTemplateViewManager: RCTViewManager {
+@objc(RNDemoLoginViewManager)
+class RNDemoLoginViewManager: RCTViewManager {
 
-  override func view() -> (ModuleTemplateView) {
-    return ModuleTemplateView()
+  override func view() -> (RNDemoLoginView) {
+    return RNDemoLoginView()
   }
 }
 
-class ModuleTemplateView : UIView {
+class RNDemoLoginView : UIView {
 
   @objc var color: String = "" {
     didSet {

@@ -2,7 +2,7 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "react-native-module-template": [
+      "demo-login": [
         "./src/index"
       ]
     },

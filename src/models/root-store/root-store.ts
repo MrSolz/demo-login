@@ -1,6 +1,6 @@
 import { getSnapshot, types } from "mobx-state-tree"
 import { DemoStoreModel } from "../demo-store"
-import { InitStoreModel, DemoSnapshotType } from "../initStore"
+import { InitStoreModel, InitSnapshotType } from "../initStore"
 
 
 /**
@@ -11,7 +11,7 @@ const RootStoreModel = types.model("RootStore").props({
     demoStore: types.optional(DemoStoreModel, {} as any),
     initStore: types.optional(InitStoreModel, {} as any),
 }).actions(self => {
-    function addInit(data: DemoSnapshotType) {
+    function addInit(data: InitSnapshotType) {
         self.initStore.saveInit(data)
         console.log('====================================');
         console.log("addInit", data);
