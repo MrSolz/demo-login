@@ -1,57 +1,57 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import axios from 'axios';
-/**
- * Axios defaults
- */
-// Headers
-axios.defaults.headers.common['Content-Type'] = 'application/json';
-axios.defaults.headers.common.Accept = 'application/json';
+const axios = require('axios');
 
-/**
- * Request Interceptor
- */
-axios.interceptors.request.use(
-    async (inputConfig) => {
-        const config: any = inputConfig;
+import * as storage from "../../utils/storage"
+import { store } from '../../models';
 
-        // Check for and add the stored Auth Token to the header request
-        let token: string = '';
-        try {
-            token = await AsyncStorage.getItem('@Auth:token') || "";
-        } catch (error) {
-            /* Nothing */
-        }
-        if (token) {
-            config.headers.common.Authorization = `Bearer ${token}`;
-        }
+export default async (endpoint: string, options: any) => {
 
-        return config;
-    },
-    (error) => {
-        throw error;
-    },
-);
+    let fullURL = endpoint;
+    if (
+        !endpoint.startsWith('http') &&
+        !endpoint.startsWith('//') &&
+        !options.keepStableUrl
+    ) {
+        // validate endpoint
+        endpoint = endpoint.startsWith('/') ? endpoint : '/' + endpoint;
+        const appApiUrl = store.initStore.api_url
+        // calc url
+        fullURL =
+            endpoint.indexOf(appApiUrl) === -1 ? appApiUrl + endpoint : endpoint;
+    }
+    let token = await storage.load("access_token");
+    let defaultLang = 'vi-VN';
 
-/**
- * Response Interceptor
- */
-axios.interceptors.response.use(
-    (res) => {
-        // Status code isn't a success code - throw error
-        if (!`${res.status}`.startsWith('2')) {
-            throw res.data;
-        }
-
-        // Otherwise just return the data
-        return res;
-    },
-    (error) => {
-        // Pass the response from the API, rather than a status code
-        if (error && error.response && error.response.data) {
-            throw error.response.data;
-        }
-        throw error;
-    },
-);
-
-export default axios;
+    return new Promise((resolve, reject) => {
+        axios({
+            method: options.method,
+            url: fullURL,
+            timeout: 15000,
+            headers: token
+                ? {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    'Accept-Language': defaultLang,
+                    "Access-Control-Allow-Origin": "*",
+                    "Access-Control-Allow-Methods": "POST",
+                    "Access-Control-Allow-Headers": "Content-Type, Authorization",
+                    "Access-Control-Allow-Credentials": "true",
+                    Authorization: 'Bearer ' + token,
+                    ...options.headers,
+                }
+                : {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                    'Accept-Language': defaultLang,
+                },
+            data: options.data,
+            params: options.params,
+        }).then((response: any) => {
+            // console.log('response fetch', response)
+            resolve(response);
+        }).catch(async (err: any) => {
+            if (err.response && (err.response.status === 401 || err.response.data.code === 401)) {
+            }
+            reject(err);
+        });
+    });
+};

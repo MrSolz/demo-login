@@ -7,13 +7,19 @@ import { AppNavigator, useNavigationPersistence } from "./navigators"
 import { initFonts } from "./theme/fonts";
 import { ErrorBoundary } from "./screens/Error/errorBoundary"
 import { RootStoreProvider, setupRootStore } from "./models"
+import { subject } from "react-native-module-template"
 const App = ({ }) => {
     const [rootStore, setRootStore] = useState(undefined)
     useEffect(() => {
         ; (async () => {
             await initFonts()
             setupRootStore().then(setRootStore)
+
         })()
+        const sub = subject.subscribe({
+            next: (v) => console.log(`observerA: `, v),
+        });
+        return () => sub.unsubscribe()
     }, [])
 
     const {

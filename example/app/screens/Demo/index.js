@@ -11,7 +11,7 @@ class Demo extends Component {
     render() {
         return (
             <View>
-                <Text> Demo </Text>
+                <Text> Demo Login App </Text>
             </View>
         );
     }

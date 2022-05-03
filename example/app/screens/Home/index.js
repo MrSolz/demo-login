@@ -14,8 +14,11 @@ const HomeScreen = observer(({
     return (
         <View style={{ justifyContent: "center", alignContent: "center", alignItems: "center", flex: 1 }}>
             <Text>Hello Home</Text>
-            <TouchableOpacity onPress={() => navigation.navigate("demo")}>
+            <TouchableOpacity style={{ marginTop: 20 }} onPress={() => navigation.navigate("demo")}>
                 <Text>Go to Demo Screen</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={{ marginTop: 20 }} onPress={() => navigation.navigate("login")}>
+                <Text>Go to Login Screen</Text>
             </TouchableOpacity>
         </View>
     )
